@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./headers";
+import Header from "./headers/Index";
 import Footer from "./footer/Index";
 
 function AppLayout({ children }) {
