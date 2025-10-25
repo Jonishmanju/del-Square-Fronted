@@ -9,5 +9,5 @@
 
 # Environment variables (optional - set these in Netlify dashboard)
 [build.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
+  NODE_VERSION = "20"
+  NPM_VERSION = "10"
