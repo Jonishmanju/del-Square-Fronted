@@ -251,10 +251,9 @@ const Projects = () => {
                     scale: 1.05,
                     backgroundColor: "rgba(255,255,255,0.3)"
                   }}
-                  transition={{ duration: 0.3 }}
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
