@@ -71,12 +71,48 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes jump {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes jump-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-30px) scale(1.05); }
+  50% { transform: translateY(-10px) scale(0.95); }
+  75% { transform: translateY(-25px) scale(1.02); }
+}
+
 /* Premium Base Styles */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   background: linear-gradient(135deg, #F7F9FC 0%, #EDF2F7 50%, #E2E8F0 100%) !important;
   color: #2D3748;
+  cursor: none; /* Hide default cursor on desktop */
+}
+
+/* Show default cursor on mobile devices */
+@media (max-width: 1023px) {
+  body {
+    cursor: auto !important;
+  }
+}
+
+/* Smooth scrolling for better UX */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal scroll */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Premium Card Components */
@@ -90,7 +126,7 @@ body {
 }
 
 .premium-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-8px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
 }
 
@@ -129,7 +165,7 @@ body {
 .premium-btn-primary:hover {
   background: linear-gradient(135deg, #2563eb, #1e40af) !important;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.6) !important;
-  transform: translateY(-2px) !important;
+  transform: translateY(-8px) !important;
 }
 
 .premium-btn-secondary {
@@ -140,7 +176,7 @@ body {
 
 .premium-btn-secondary:hover {
   background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-6px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
@@ -152,7 +188,7 @@ body {
 .premium-btn-danger:hover {
   background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
   box-shadow: 0 6px 16px rgba(239, 68, 68, 0.6) !important;
-  transform: translateY(-2px) !important;
+  transform: translateY(-8px) !important;
 }
 
 /* Premium Form Elements */
@@ -208,7 +244,7 @@ body {
 }
 
 .premium-avatar:hover {
-  transform: scale(1.05);
+  transform: scale(1.1) translateY(-8px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -237,7 +273,7 @@ body {
 }
 
 .premium-tag:hover {
-  transform: scale(1.05);
+  transform: scale(1.1) translateY(-5px);
 }
 
 .premium-tag-active {
@@ -381,7 +417,8 @@ body {
 .premium-nav-item:hover {
   color: rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.1);
-  transform: translateX(4px) scale(1.02);
+  transform: translateX(4px) translateY(-4px) scale(1.02);
+  animation: jump 0.4s ease-in-out;
 }
 
 .premium-nav-item.active {
@@ -410,8 +447,9 @@ body {
 }
 
 .premium-header-profile:hover {
-  transform: scale(1.02);
+  transform: scale(1.05) translateY(-4px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  animation: jump 0.4s ease-in-out;
 }
 
 /* Premium Dashboard Cards */
@@ -426,8 +464,9 @@ body {
 }
 
 .premium-stats-card:hover {
-  transform: translateY(-8px) scale(1.02) rotateY(5deg);
+  transform: translateY(-12px) scale(1.05) rotateY(5deg);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  animation: jump 0.6s ease-in-out;
 }
 
 .premium-stats-icon {
@@ -657,7 +696,8 @@ body {
 .royal-btn-primary:hover {
   background: linear-gradient(135deg, #2563eb, #1e40af) !important;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.6) !important;
-  transform: translateY(-2px) !important;
+  transform: translateY(-8px) !important;
+  animation: jump 0.5s ease-in-out;
 }
 
 .royal-btn-secondary {
@@ -671,8 +711,9 @@ body {
 
 .royal-btn-secondary:hover {
   background: linear-gradient(135deg, #e2e8f0, #cbd5e1) !important;
-  transform: translateY(-1px) !important;
+  transform: translateY(-6px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  animation: jump 0.4s ease-in-out;
 }
 
 .royal-header {
@@ -717,7 +758,8 @@ body {
 .royal-nav-item:hover {
   color: rgba(255, 255, 255, 0.95);
   background: rgba(255, 255, 255, 0.1);
-  transform: translateX(4px);
+  transform: translateX(4px) translateY(-4px);
+  animation: jump 0.4s ease-in-out;
 }
 
 .royal-nav-item.active {
@@ -738,7 +780,8 @@ body {
 .ant-btn-primary:hover {
   background: linear-gradient(135deg, #2563eb, #1e40af) !important;
   box-shadow: 0 6px 16px rgba(59, 130, 246, 0.6) !important;
-  transform: translateY(-2px) !important;
+  transform: translateY(-8px) !important;
+  animation: jump 0.5s ease-in-out;
 }
 
 .ant-input {
@@ -943,6 +986,40 @@ body {
   animation: pulse-glow 2s infinite;
 }
 
+.animate-jump {
+  animation: jump 0.6s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.animate-jump-bounce {
+  animation: jump-bounce 1s ease-in-out infinite;
+  cursor: pointer;
+}
+
+/* Make all premium cards jump on hover */
+.premium-card:hover {
+  animation: jump 0.8s ease-in-out;
+}
+
+/* Make buttons jump */
+.premium-btn:hover,
+.royal-btn-primary:hover,
+.royal-btn-secondary:hover {
+  animation: jump 0.4s ease-in-out;
+}
+
+/* Make tags jump */
+.premium-tag:hover,
+.premium-tag-enhanced:hover {
+  animation: jump 0.3s ease-in-out;
+}
+
+/* Make avatar jump */
+.premium-avatar:hover,
+.premium-avatar-enhanced:hover {
+  animation: jump-bounce 0.6s ease-in-out;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -956,6 +1033,51 @@ body {
 @keyframes scaleIn {
   from { opacity: 0; transform: scale(0.9); }
   to { opacity: 1; transform: scale(1); }
+}
+
+/* Scroll-triggered animations */
+.scroll-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-slide-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-slide-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-slide-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-scale-in {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Royal Premium Legacy Styles - Maintained for Compatibility */
@@ -1022,17 +1144,6 @@ body {
   text-decoration: none;
   transition: all 0.3s ease;
   font-weight: 500;
-}
-
-.royal-nav-item:hover {
-  color: rgba(255, 255, 255, 0.95);
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateX(4px);
-}
-
-.royal-nav-item.active {
-  color: white;
-  font-weight: 600;
 }
 
 /* Ant Design Overrides for Premium Look */
@@ -1154,6 +1265,6 @@ body {
 
 @media (max-width: 700px) {
   .mabileWidthProductGrid {
-    minwidth: "350px";
+    min-width: 350px;
   }
 }

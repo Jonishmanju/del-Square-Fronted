@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
 import { Phone, Mail, MapPin, Clock, MessageCircle, Send, CheckCircle, Upload, X, Calendar, Users, Building2, Calculator, FileText, Camera, Video, Mic, Star, Heart, Zap, Shield, Award, Globe, Download } from "lucide-react";
+import ScrollReveal from "../../../components/animations/ScrollReveal";
 
 const Contact = () => {
   const theme = useContext(ThemeContext);
@@ -286,20 +287,21 @@ const Contact = () => {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <ScrollReveal y={40} rotateX={15}>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Get In Touch</h2>
+          </ScrollReveal>
+
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
-              
               <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
+                {contactInfo.map((info, index) => (
+                  <ScrollReveal key={index} delay={index * 0.1} y={20} rotateY={15}>
+                    <motion.div
+                      className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                      whileHover={{ y: -5, scale: 1.02 }}
+                      transition={{ duration: 0.3 }}
+                    >
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 text-blue-600">
                       {info.icon}
@@ -309,10 +311,11 @@ const Contact = () => {
                       <p className="text-gray-600 font-semibold">{info.value}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm">{info.description}</p>
-                </motion.div>
+                    <p className="text-gray-600 text-sm">{info.description}</p>
+                  </motion.div>
+                </ScrollReveal>
               ))}
-                </div>
+              </div>
 
             {/* WhatsApp Button */}
             <motion.div
@@ -335,15 +338,15 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Send Us a Message</h2>
-            
-            <motion.form
-              className="bg-white p-8 rounded-xl shadow-lg"
-              onSubmit={handleSubmit}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            <ScrollReveal delay={0.2} y={30} rotateY={-15}>
+              <h2 className="text-3xl font-bold text-gray-900 mb-8">Send Us a Message</h2>
+              
+              <motion.form
+                className="bg-white p-8 rounded-xl shadow-lg"
+                onSubmit={handleSubmit}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
               <div className="mb-6">
                 <label className="block text-gray-700 font-semibold mb-2">Name *</label>
                     <input 
@@ -552,9 +555,11 @@ const Contact = () => {
                 <Send className="w-5 h-5" />
                   Send Message
               </motion.button>
-            </motion.form>
+              </motion.form>
+            </ScrollReveal>
             </div>
           </div>
+        </div>
 
           {/* Quick Contact Options */}
         <motion.div
@@ -599,7 +604,6 @@ const Contact = () => {
             </motion.button>
           </div>
         </motion.div>
-      </div>
 
       {/* Live Chat Modal */}
       <AnimatePresence>

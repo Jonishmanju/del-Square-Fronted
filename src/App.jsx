@@ -1,32 +1,44 @@
-import "./App.css";
+import "./styles/App.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import React from "react";
-import { LoadingOutlined } from "@ant-design/icons";
+import PageTransition from "./components/animations/PageTransition";
+import CustomCursor from "./components/cursor/CustomCursor";
+import LoadingAnimation from "./components/LoadingAnimation";
 
 const Public = React.lazy(() => import("./Pages/Public/Index"));
 const PrivateRouting = React.lazy(() => import("./Pages/PrivateRouting/Index"));
 
-function App() {
+export default function App() {
+  const [showLoader, setShowLoader] = useState(true);
+  const location = useLocation();
+
+  const handleLoaderComplete = () => {
+    setShowLoader(false);
+  };
+
+  // Show loader on every route change
+  useEffect(() => {
+    setShowLoader(true);
+  }, [location.pathname]);
+
   return (
-    <Suspense
-      fallback={
-        <div className="text-center mt-10">
-          <LoadingOutlined />
-        </div>
-      }
-    >
-      <Routes>
-        <Route path="/*" element={<Public />} />
-        <Route
-          path="/admin/*"
-          element={
-            <PrivateRouting />
-          }
-        />
-      </Routes>
-    </Suspense>
+    <>
+      {/* Loading Animation - Shows on every page change */}
+      {showLoader && <LoadingAnimation onComplete={handleLoaderComplete} />}
+      
+      {/* Premium Custom Cursor */}
+      <CustomCursor />
+      
+      {/* Main Application */}
+      <Suspense fallback={null}>
+        <PageTransition>
+          <Routes>
+            <Route path="/*" element={<Public />} />
+            <Route path="/auth/*" element={<PrivateRouting />} />
+          </Routes>
+        </PageTransition>
+      </Suspense>
+    </>
   );
 }
-
-export default App;

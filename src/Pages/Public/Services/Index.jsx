@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
 import { Building2, Users, Calculator, Award, CheckCircle, MapPin, Phone, MessageCircle } from "lucide-react";
+import ScrollReveal from "../../../components/animations/ScrollReveal";
 
 const Services = () => {
   const theme = useContext(ThemeContext);
@@ -159,19 +160,26 @@ const Services = () => {
 
       {/* Services Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
+        <ScrollReveal y={40} rotateX={15}>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Our Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive structural engineering solutions
+            </p>
+          </div>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-l-4 ${getColorClasses(service.color).split(' ')[2]}`}
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
+            <ScrollReveal key={index} delay={index * 0.15} y={30} rotateY={20}>
+              <motion.div
+                className={`bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border-l-4 ${getColorClasses(service.color).split(' ')[2]}`}
+                whileHover={{ y: -5, scale: 1.02, rotateY: 5 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               <div className="p-8">
                 <div className={`w-16 h-16 rounded-lg flex items-center justify-center mb-6 ${getColorClasses(service.color)}`}>
                   {service.icon}
@@ -190,52 +198,63 @@ const Services = () => {
                   ))}
                 </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* Why Choose Us Section */}
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Del Square?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We combine technical expertise with cost-effective solutions to deliver exceptional results
-            </p>
-          </div>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why Choose Del Square?
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                We combine technical expertise with cost-effective solutions to deliver exceptional results
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Team</h3>
-              <p className="text-gray-600">Certified structural engineers with years of experience</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Calculator className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Cost Savings</h3>
-              <p className="text-gray-600">Guaranteed 15-20% cost savings through optimized design</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Quality Assurance</h3>
-              <p className="text-gray-600">Rigorous quality control and site supervision</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Expertise</h3>
-              <p className="text-gray-600">Deep understanding of Tamil Nadu's construction landscape</p>
-            </div>
+            <ScrollReveal delay={0.1} y={30} rotateY={15}>
+              <motion.div className="text-center" whileHover={{ scale: 1.05, rotateY: 5 }} transition={{ duration: 0.3 }} style={{ transformStyle: 'preserve-3d' }}>
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Expert Team</h3>
+                <p className="text-gray-600">Certified structural engineers with years of experience</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.2} y={30} rotateY={15}>
+              <motion.div className="text-center" whileHover={{ scale: 1.05, rotateY: 5 }} transition={{ duration: 0.3 }} style={{ transformStyle: 'preserve-3d' }}>
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Calculator className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Cost Savings</h3>
+                <p className="text-gray-600">Guaranteed 15-20% cost savings through optimized design</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.3} y={30} rotateY={15}>
+              <motion.div className="text-center" whileHover={{ scale: 1.05, rotateY: 5 }} transition={{ duration: 0.3 }} style={{ transformStyle: 'preserve-3d' }}>
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Quality Assurance</h3>
+                <p className="text-gray-600">Rigorous quality control and site supervision</p>
+              </motion.div>
+            </ScrollReveal>
+            <ScrollReveal delay={0.4} y={30} rotateY={15}>
+              <motion.div className="text-center" whileHover={{ scale: 1.05, rotateY: 5 }} transition={{ duration: 0.3 }} style={{ transformStyle: 'preserve-3d' }}>
+                <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Expertise</h3>
+                <p className="text-gray-600">Deep understanding of Tamil Nadu's construction landscape</p>
+              </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </div>

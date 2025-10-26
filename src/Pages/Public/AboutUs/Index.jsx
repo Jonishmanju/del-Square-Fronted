@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
 import { Building2, Award, Users, CheckCircle, MapPin, Phone, MessageCircle } from "lucide-react";
+import ScrollReveal from "../../../components/animations/ScrollReveal";
 
 const AboutUs = () => {
   const theme = useContext(ThemeContext);
@@ -102,49 +103,44 @@ const AboutUs = () => {
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <div className="space-y-4 text-gray-600">
-                <p>
-                  Founded in 2017, Del Square has been at the forefront of structural engineering innovation, 
-                  providing cutting-edge solutions with a focus on safety, efficiency, and cost-effectiveness. 
-                  We believe that every construction project deserves professional engineering expertise.
-                </p>
-                <p>
-                  Our state-of-the-art design processes combine advanced technology with practical experience, 
-                  ensuring that each project receives the best possible structural solutions in a timely and 
-                  cost-effective manner.
-                </p>
-                <p>
-                  With over 240 successful projects and a track record of delivering 15-20% cost savings, 
-                  we continue to set new standards in structural engineering excellence across Tamil Nadu.
-                </p>
+            <ScrollReveal y={30} rotateY={15}>
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
+                <div className="space-y-4 text-gray-600">
+                  <p>
+                    Founded in 2017, Del Square has been at the forefront of structural engineering innovation, 
+                    providing cutting-edge solutions with a focus on safety, efficiency, and cost-effectiveness. 
+                    We believe that every construction project deserves professional engineering expertise.
+                  </p>
+                  <p>
+                    Our state-of-the-art design processes combine advanced technology with practical experience, 
+                    ensuring that each project receives the best possible structural solutions in a timely and 
+                    cost-effective manner.
+                  </p>
+                  <p>
+                    With over 240 successful projects and a track record of delivering 15-20% cost savings, 
+                    we continue to set new standards in structural engineering excellence across Tamil Nadu.
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
             
-            <motion.div
-              className="bg-gray-50 p-8 rounded-xl"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Choose Del Square?</h3>
-              <div className="space-y-4">
-                {values.map((value, index) => (
-                  <div key={index} className="flex items-start">
-                    <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-1">{value.title}</h4>
-                      <p className="text-gray-600 text-sm">{value.description}</p>
+            <ScrollReveal delay={0.2} y={30} rotateY={-15}>
+              <div className="bg-gray-50 p-8 rounded-xl">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Choose Del Square?</h3>
+                <div className="space-y-4">
+                  {values.map((value, index) => (
+                    <div key={index} className="flex items-start">
+                      <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-1">{value.title}</h4>
+                        <p className="text-gray-600 text-sm">{value.description}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </motion.div>
+            </ScrollReveal>
           </div>
         </div>
       </div>
@@ -152,25 +148,25 @@ const AboutUs = () => {
       {/* Achievements Section */}
       <div className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Achievements
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Numbers that speak for our commitment to excellence and client satisfaction
-            </p>
-          </div>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Our Achievements
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Numbers that speak for our commitment to excellence and client satisfaction
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {achievements.map((achievement, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
+              <ScrollReveal key={index} delay={index * 0.1} y={30} rotateY={20}>
+                <motion.div
+                  className="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow duration-300"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
                   {achievement.icon}
                 </div>
@@ -178,6 +174,7 @@ const AboutUs = () => {
                 <div className="text-lg font-semibold text-gray-700 mb-2">{achievement.label}</div>
                 <div className="text-sm text-gray-600">{achievement.description}</div>
               </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -186,25 +183,25 @@ const AboutUs = () => {
       {/* Team Section */}
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Expert Team
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Meet the certified professionals who make Del Square a trusted name in structural engineering
-            </p>
-          </div>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Our Expert Team
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Meet the certified professionals who make Del Square a trusted name in structural engineering
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid md:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-shadow duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
+              <ScrollReveal key={index} delay={index * 0.15} y={30} rotateY={15}>
+                <motion.div
+                  className="bg-gray-50 p-8 rounded-xl text-center hover:shadow-lg transition-shadow duration-300"
+                  whileHover={{ y: -5, scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                 <div className="w-24 h-24 bg-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center">
                   <Users className="w-12 h-12 text-white" />
                 </div>
@@ -213,6 +210,7 @@ const AboutUs = () => {
                 <p className="text-gray-600 text-sm mb-2">{member.experience} experience</p>
                 <p className="text-gray-600 text-sm">{member.specialization}</p>
               </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

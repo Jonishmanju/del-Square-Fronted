@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Suspense } from "react";
-import { LoadingOutlined } from "@ant-design/icons";
 import { Route, Routes, useLocation } from "react-router-dom";
 const PageNotFound = React.lazy(() => import("../PageNotFound/Index"));
 const LandingPage = React.lazy(() => import("./LandingPage/Index"));
@@ -8,8 +7,9 @@ const AboutUs = React.lazy(() => import("./AboutUs/Index"));
 const Services = React.lazy(() => import("./Services/Index"));
 const Projects = React.lazy(() => import("./Projects/Index"));
 const Contact = React.lazy(() => import("./Contact/Index"));
-import ScrollToTop from "../../Component/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import AppLayout from "../../layouts/Index";
+import LottieLoader from "../../components/LottieLoader";
 
 const Index = () => {
 
@@ -18,8 +18,8 @@ const Index = () => {
       <ScrollToTop />
       <Suspense
         fallback={
-          <div className="text-center mt-10">
-            <LoadingOutlined />
+          <div className="flex justify-center items-center min-h-screen">
+            <LottieLoader width={250} height={250} />
           </div>
         }
       >

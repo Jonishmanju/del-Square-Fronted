@@ -155,6 +155,17 @@ height: 4px !important;
   scrollbar-width: none; /* Firefox */
 }
 
+/* 3D Page Transition Effects */
+.page-transition-container {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.page-transition-content {
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
 
 
 

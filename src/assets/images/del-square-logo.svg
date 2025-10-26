@@ -1,0 +1,31 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Square Border -->
+  <rect x="10" y="10" width="180" height="180" fill="none" stroke="#1e3a8a" stroke-width="6"/>
+  
+  <!-- Inner Triangle -->
+  <polygon points="100,30 170,160 30,160" fill="none" stroke="#1e3a8a" stroke-width="5"/>
+  
+  <!-- Three Abstract Buildings (increasing height from left to right) -->
+  <!-- Leftmost building (shortest) -->
+  <rect x="50" y="140" width="20" height="15" fill="#1e3a8a"/>
+  
+  <!-- Middle building (medium) -->
+  <rect x="75" y="125" width="20" height="30" fill="#1e3a8a"/>
+  
+  <!-- Rightmost building (tallest) -->
+  <rect x="100" y="100" width="20" height="55" fill="#1e3a8a"/>
+  
+  <!-- Ground/Foundation diagonal lines -->
+  <g stroke="#1e3a8a" stroke-width="2" stroke-linecap="round">
+    <line x1="35" y1="165" x2="45" y2="165"/>
+    <line x1="50" y1="165" x2="60" y2="165"/>
+    <line x1="65" y1="165" x2="75" y2="165"/>
+    <line x1="80" y1="165" x2="90" y2="165"/>
+    <line x1="95" y1="165" x2="105" y2="165"/>
+    <line x1="110" y1="165" x2="120" y2="165"/>
+    <line x1="125" y1="165" x2="135" y2="165"/>
+    <line x1="140" y1="165" x2="150" y2="165"/>
+    <line x1="155" y1="165" x2="165" y2="165"/>
+  </g>
+</svg>
+

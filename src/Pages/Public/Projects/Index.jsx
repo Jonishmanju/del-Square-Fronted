@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
 import { Building2, MapPin, Calendar, Users, Home, Building, Factory, Grid3X3, ShoppingCart, Briefcase, Utensils, Star, Award, Zap, Sparkles, TrendingUp, Shield, Clock } from "lucide-react";
+import ScrollReveal from "../../../components/animations/ScrollReveal";
 
 const Projects = () => {
   const theme = useContext(ThemeContext);
@@ -292,44 +293,46 @@ const Projects = () => {
 
       {/* Filter Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="text-center mb-8">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-8">Browse our portfolio by category</h2>
-          <div className="flex flex-wrap justify-center gap-4">
-            {filters.map((filter) => (
-              <motion.button
-                key={filter.name}
-                onClick={() => setActiveFilter(filter.name)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                  activeFilter === filter.name
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50'
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {filter.icon}
-                <span>{filter.name}</span>
-              </motion.button>
-            ))}
+        <ScrollReveal y={30} rotateX={10}>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-gray-700 mb-8">Browse our portfolio by category</h2>
+            
+            <div className="flex flex-wrap justify-center gap-4">
+              {filters.map((filter, index) => (
+                <ScrollReveal key={filter.name} delay={index * 0.1} y={20} rotateY={10}>
+                  <motion.button
+                    onClick={() => setActiveFilter(filter.name)}
+                    className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                      activeFilter === filter.name
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50'
+                    }`}
+                    whileHover={{ scale: 1.05, rotateY: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ transformStyle: 'preserve-3d' }}
+                  >
+                    {filter.icon}
+                    <span>{filter.name}</span>
+                  </motion.button>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
 
       {/* Projects Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {filteredProjects.map((project) => (
-            <motion.div
-              key={project.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-              variants={itemVariants}
-              whileHover={{ y: -5 }}
-            >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProjects.map((project, index) => (
+            <ScrollReveal key={project.id} delay={index * 0.15} y={30} rotateY={20}>
+              <motion.div
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                whileHover={{ y: -5, scale: 1.02, rotateY: 5 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               {/* Top Section - Light Blue Background */}
               <div className="bg-blue-50 p-8 relative">
                 <div className="flex justify-center mb-4">
@@ -363,9 +366,10 @@ const Projects = () => {
                 
                 <p className="text-gray-600 text-sm">{project.description}</p>
               </div>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* CTA Section */}

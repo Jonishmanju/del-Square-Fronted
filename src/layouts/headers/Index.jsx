@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useInView } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ThemeContext } from "../../themes/ThemeProvider";
 import { getGradient } from "../../themes/theme";
 import { Building2, Home, Users, Briefcase, FolderOpen, Phone, MessageCircle, Sparkles, Zap } from "lucide-react";
+import logoImage from "../../assets/images/del-square-logo.svg";
+import ScrollReveal from "../../components/animations/ScrollReveal";
 
 export default function Header() {
   const theme = useContext(ThemeContext);
@@ -84,12 +86,14 @@ export default function Header() {
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <motion.div 
-            className="flex items-center space-x-2"
+            className="flex items-center space-x-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            <motion.div 
-              className="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center shadow-lg"
+            <motion.img 
+              src={logoImage}
+              alt="Del Square Logo"
+              className="w-16 h-16"
               animate={{ 
                 boxShadow: [
                   '0 4px 15px rgba(59, 130, 246, 0.3)',
@@ -98,16 +102,9 @@ export default function Header() {
                 ]
               }}
               transition={{ duration: 2, repeat: Infinity }}
-            >
-              <motion.div
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              >
-                <Building2 className="w-8 h-8 text-white" />
-              </motion.div>
-            </motion.div>
+            />
             <motion.span
-              className="font-bold text-xl"
+              className="font-bold text-xl hidden md:block"
               style={{ color: theme.primary }}
               animate={{
                 textShadow: [
@@ -125,15 +122,18 @@ export default function Header() {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-1 font-medium text-gray-800">
             {menuItems.map((item, index) => (
-              <motion.div
+              <ScrollReveal 
                 key={item.label}
+                delay={index * 0.1}
+                y={-20}
+                rotateY={10}
+                scale={0.9}
                 className="relative"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                onHoverStart={() => setHoveredItem(item.label)}
-                onHoverEnd={() => setHoveredItem(null)}
               >
+                <motion.div
+                  onHoverStart={() => setHoveredItem(item.label)}
+                  onHoverEnd={() => setHoveredItem(null)}
+                >
                 <motion.div
                   onClick={() => handleNav(item.path)}
                   className={`relative px-3 py-1.5 cursor-pointer transition-all duration-300 ${
@@ -198,6 +198,7 @@ export default function Header() {
 
                 </motion.div>
               </motion.div>
+            </ScrollReveal>
             ))}
           </div>
 
@@ -228,7 +229,7 @@ export default function Header() {
           {/* Mobile Toggle */}
           <button
             type="button"
-            className="md:hidden p-2 border border-gray-300 rounded"
+            className="md:hidden p-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
             onClick={() => setMobileOpen((prev) => !prev)}
           >
             {mobileOpen ? "✖" : "☰"}
@@ -243,7 +244,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.3 }}
-              className="fixed top-0 right-0 w-3/4 h-full bg-white shadow-lg p-6 space-y-6 z-50 md:hidden"
+              className="fixed top-0 right-0 w-full sm:w-3/4 h-full bg-white shadow-2xl p-6 space-y-6 z-50 md:hidden overflow-y-auto"
             >
               {/* Close Button */}
               <button
@@ -317,25 +318,26 @@ export default function Header() {
               </div>
 
               {/* Mobile Buttons */}
-              <div className="flex flex-col gap-4 mt-6">
+              <div className="flex flex-col gap-3 mt-6">
                 <motion.a
                   href="tel:+919159875674"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full text-white px-6 py-3 rounded-lg font-semibold shadow-md text-center"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full text-white px-4 py-3 rounded-lg font-semibold shadow-md text-center text-sm"
                   style={{ background: getGradient(theme) }}
                 >
-                  CALL NOW
+                  📞 CALL NOW
                 </motion.a>
 
                 <motion.a
                   href="https://wa.me/919159875674"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileTap={{ scale: 0.95 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="w-full flex items-center justify-center gap-2 bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 shadow-lg"
+                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="w-full flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-green-700 shadow-lg text-sm"
                 >
+                  <MessageCircle className="w-4 h-4" />
                   WhatsApp Us
                 </motion.a>
               </div>

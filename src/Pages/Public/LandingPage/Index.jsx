@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, useInView, AnimatePresence } from "fra
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
 import { Building2, Phone, MessageCircle, Calculator, Award, Users, MapPin, CheckCircle, Zap, PiggyBank, Heart, Star, TrendingUp, Shield, Clock, Moon, Sun, Upload, Send, X, ChevronRight, ChevronLeft, Play, Pause, Volume2, VolumeX, Sparkles, Zap as Lightning } from "lucide-react";
+import ScrollReveal from "../../../components/animations/ScrollReveal";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -472,26 +473,21 @@ const LandingPage = () => {
             </motion.div>
 
             {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
-            >
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={index} 
-                  className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4 relative overflow-hidden"
-                  whileHover={{ 
-                    scale: 1.05,
-                    backgroundColor: "rgba(255,255,255,0.3)",
-                    rotateY: 5,
-                    rotateX: 5
-                  }}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
+            <ScrollReveal y={40} rotateX={10}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                {stats.map((stat, index) => (
+                  <ScrollReveal key={index} delay={index * 0.1} y={20} rotateY={15}>
+                    <motion.div 
+                      className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-4 relative overflow-hidden"
+                      whileHover={{ 
+                        scale: 1.05,
+                        backgroundColor: "rgba(255,255,255,0.3)",
+                        rotateY: 5,
+                        rotateX: 5
+                      }}
+                      transition={{ duration: 0.3 }}
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
                     initial={{ x: "-100%" }}
@@ -546,9 +542,11 @@ const LandingPage = () => {
                   >
                     <Sparkles className="w-4 h-4 text-yellow-300" />
                   </motion.div>
-                </motion.div>
-              ))}
-            </motion.div>
+                    </motion.div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </ScrollReveal>
           </div>
         </motion.div>
       </section>
@@ -556,26 +554,16 @@ const LandingPage = () => {
       {/* Interactive Project Showcase */}
       <section className={`py-20 ${darkMode ? 'bg-gray-800' : 'bg-white'} transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2 
-              className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Featured Projects
-            </motion.h2>
-            <motion.p 
-              className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Explore our most successful projects with interactive 3D showcase
-            </motion.p>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                Featured Projects
+              </h2>
+              <p className={`text-xl max-w-3xl mx-auto ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Explore our most successful projects with interactive 3D showcase
+              </p>
             </div>
+          </ScrollReveal>
             
           <div className="relative">
             <motion.div 
@@ -674,30 +662,32 @@ const LandingPage = () => {
       {/* Services Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Services
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive structural engineering and construction consultancy services across Tamil Nadu
-            </p>
-          </div>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Our Services
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Comprehensive structural engineering and construction consultancy services across Tamil Nadu
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
+              <ScrollReveal key={index} delay={index * 0.15} rotateY={20} y={30}>
+                <motion.div
+                  className="bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg transition-shadow duration-300"
+                  whileHover={{ y: -5, scale: 1.02, rotateY: 5 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
                 <div className="text-blue-600 mb-4">{service.icon}</div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
                 <p className="text-blue-600 font-semibold mb-3">{service.price}</p>
                 <p className="text-gray-600">{service.description}</p>
               </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -706,85 +696,92 @@ const LandingPage = () => {
       {/* Why Work with Del Square Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Work with Del Square?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              5 reasons clients trust us with their projects
-            </p>
-          </div>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why Work with Del Square?
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                5 reasons clients trust us with their projects
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12">
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              whileHover={{ y: -5 }}
-            >
+            <ScrollReveal delay={0.1} rotateY={25} y={40}>
+              <motion.div
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                whileHover={{ y: -5, rotateY: 5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Fast Response</h3>
               <p className="text-gray-600 text-sm">2-4 hour response time during business hours</p>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <PiggyBank className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Cost Savings</h3>
-              <p className="text-gray-600 text-sm">15-20% savings through value engineering</p>
-            </motion.div>
+            <ScrollReveal delay={0.2} rotateY={25} y={40}>
+              <motion.div
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                whileHover={{ y: -5, rotateY: 5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <PiggyBank className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Cost Savings</h3>
+                <p className="text-gray-600 text-sm">15-20% savings through value engineering</p>
+              </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Experience</h3>
-              <p className="text-gray-600 text-sm">8 years, 240+ projects completed</p>
-            </motion.div>
+            <ScrollReveal delay={0.3} rotateY={25} y={40}>
+              <motion.div
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                whileHover={{ y: -5, rotateY: 5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Award className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Experience</h3>
+                <p className="text-gray-600 text-sm">8 years, 240+ projects completed</p>
+              </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              whileHover={{ y: -5 }}
-            >
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">Local Expertise</h3>
-              <p className="text-gray-600 text-sm">Deep knowledge of Tamil Nadu regulations</p>
-            </motion.div>
+            <ScrollReveal delay={0.4} rotateY={25} y={40}>
+              <motion.div
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                whileHover={{ y: -5, rotateY: 5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MapPin className="w-8 h-8 text-blue-600" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2">Local Expertise</h3>
+                <p className="text-gray-600 text-sm">Deep knowledge of Tamil Nadu regulations</p>
+              </motion.div>
+            </ScrollReveal>
 
-            <motion.div
-              className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              whileHover={{ y: -5 }}
-            >
+            <ScrollReveal delay={0.5} rotateY={25} y={40}>
+              <motion.div
+                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 text-center"
+                whileHover={{ y: -5, rotateY: 5, scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Heart className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Client Retention</h3>
               <p className="text-gray-600 text-sm">90%+ clients return for more projects</p>
-            </motion.div>
+              </motion.div>
+            </ScrollReveal>
           </div>
 
           {/* CTA Button */}
@@ -810,26 +807,16 @@ const LandingPage = () => {
       {/* Advanced Testimonials Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.h2 
-              className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              What Our Clients Say
-            </motion.h2>
-            <motion.p 
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Real feedback from satisfied clients across Tamil Nadu
-            </motion.p>
+          <ScrollReveal y={40} rotateX={15}>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What Our Clients Say
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Real feedback from satisfied clients across Tamil Nadu
+              </p>
             </div>
+          </ScrollReveal>
             
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -858,15 +845,13 @@ const LandingPage = () => {
                 project: "Industrial Facility - Salem"
               }
             ].map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -5 }}
-              >
+              <ScrollReveal key={index} delay={index * 0.2} y={30} rotateY={20}>
+                <motion.div
+                  className="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 relative"
+                  whileHover={{ y: -5, scale: 1.02, rotateY: 5 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -887,7 +872,8 @@ const LandingPage = () => {
             </div>
                   </div>
                 </div>
-              </motion.div>
+                </motion.div>
+              </ScrollReveal>
             ))}
           </div>
         </div>

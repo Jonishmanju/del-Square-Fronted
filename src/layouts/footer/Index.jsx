@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Building2, Phone, Mail, MapPin, Clock } from "lucide-react";
+import logoImage from "../../assets/images/del-square-logo.svg";
 
 export default function Footer() {
   const navigate = useNavigate();
@@ -21,9 +22,11 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-3">
-                <Building2 className="w-8 h-8 text-white" />
-              </div>
+              <img 
+                src={logoImage}
+                alt="Del Square Logo"
+                className="w-16 h-16 mr-3"
+              />
               <div>
                 <div className="font-semibold text-lg">
                   DEL SQUARE

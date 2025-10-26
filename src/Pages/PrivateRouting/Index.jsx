@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Suspense } from "react";
-import { LoadingOutlined } from "@ant-design/icons";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import PageNotFound from "../PageNotFound/Index";
-import ScrollToTop from "../../Component/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import AdminLayout from "./layouts/Index";
+import LottieLoader from "../../components/LottieLoader";
 
 // Dashboard Components
 const Dashboard = React.lazy(() => import("./Dashboard/Index"));
@@ -21,8 +21,8 @@ const Index = () => {
       <ScrollToTop />
       <Suspense
         fallback={
-          <div className="text-center mt-10">
-            <LoadingOutlined />
+          <div className="flex justify-center items-center min-h-screen">
+            <LottieLoader width={250} height={250} />
           </div>
         }
       >
