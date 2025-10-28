@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
-import { Building2, Phone, MessageCircle, Calculator, Award, Users, MapPin, CheckCircle, Zap, PiggyBank, Heart, Star, TrendingUp, Shield, Clock, Moon, Sun, Upload, Send, X, ChevronRight, ChevronLeft, Play, Pause, Volume2, VolumeX, Sparkles, Zap as Lightning } from "lucide-react";
+import { Building2, Phone, Calculator, Award, Users, MapPin, CheckCircle, Zap, PiggyBank, Heart, Star, TrendingUp, Shield, Clock, Moon, Sun, Upload, Send, X, ChevronRight, ChevronLeft, Play, Pause, Volume2, VolumeX, Sparkles, Zap as Lightning, MoreVertical } from "lucide-react";
 import ScrollReveal from "../../../components/animations/ScrollReveal";
+import CountUp from "../../../components/animations/CountUp";
+import WhatsAppIcon from "../../../components/icons/WhatsAppIcon";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ const LandingPage = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [showCalculator, setShowCalculator] = useState(false);
+  const [showFABMenu, setShowFABMenu] = useState(false);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(true);
@@ -242,38 +245,72 @@ const LandingPage = () => {
         {darkMode ? <Sun className="w-6 h-6 text-white" /> : <Moon className="w-6 h-6 text-white" />}
       </motion.button>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed right-6 bottom-6 space-y-4 z-50">
+      {/* Floating Action Buttons - Three Dots Menu */}
+      <div className="fixed right-6 bottom-6 z-50">
+        {/* Menu Toggle Button */}
         <motion.button
-          onClick={() => setShowCalculator(!showCalculator)}
-          className="w-14 h-14 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+          onClick={() => setShowFABMenu(!showFABMenu)}
+          className="w-16 h-16 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          title="Cost Calculator"
+          title="Quick Actions"
         >
-          <Calculator className="w-6 h-6 text-white" />
-        </motion.button>
-        
-        <motion.button
-          onClick={() => setShowChat(!showChat)}
-          className="w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title="Live Chat"
-        >
-          <MessageCircle className="w-6 h-6 text-white" />
+          <MoreVertical className="w-8 h-8 text-white" />
         </motion.button>
 
-        <motion.a
-          href="tel:+919159875674"
-          className="w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title="Call Now"
-        >
-          <Phone className="w-6 h-6 text-white" />
-        </motion.a>
-          </div>
+        {/* Action Buttons */}
+        <AnimatePresence>
+          {showFABMenu && (
+            <>
+              <motion.button
+                initial={{ opacity: 0, y: 20, scale: 0.5 }}
+                animate={{ opacity: 1, y: -80, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.5 }}
+                onClick={() => {
+                  setShowCalculator(!showCalculator);
+                  setShowFABMenu(false);
+                }}
+                className="absolute w-14 h-14 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                title="Cost Calculator"
+              >
+                <Calculator className="w-6 h-6 text-white" />
+              </motion.button>
+
+              <motion.a
+                initial={{ opacity: 0, y: 20, scale: 0.5 }}
+                animate={{ opacity: 1, y: -140, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.5 }}
+                transition={{ delay: 0.1 }}
+                href="tel:+919159875674"
+                className="absolute w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                title="Call Now"
+              >
+                <Phone className="w-6 h-6 text-white" />
+              </motion.a>
+
+              <motion.a
+                initial={{ opacity: 0, y: 20, scale: 0.5 }}
+                animate={{ opacity: 1, y: -200, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.5 }}
+                transition={{ delay: 0.2 }}
+                href="https://wa.me/919159875674"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                title="WhatsApp Us"
+              >
+                <WhatsAppIcon className="w-6 h-6" color="#ffffff" />
+              </motion.a>
+            </>
+          )}
+        </AnimatePresence>
+      </div>
       {/* Hero Section */}
       <section ref={heroRef} className="bg-gradient-to-br from-blue-900 to-blue-700 text-white py-20 relative overflow-hidden min-h-screen flex items-center">
         {/* Animated Background Elements */}
@@ -459,7 +496,7 @@ const LandingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <MessageCircle className="w-5 h-5" />
+                <WhatsAppIcon className="w-5 h-5" color="#ffffff" />
                 WhatsApp Us
               </motion.a>
               <motion.button
@@ -499,20 +536,9 @@ const LandingPage = () => {
                       delay: index * 0.5
                     }}
                   />
-                  <motion.div 
-                    className="text-2xl md:text-3xl font-bold relative z-10"
-                    animate={{ 
-                      scale: [1, 1.1, 1],
-                      color: ['#ffffff', '#60a5fa', '#ffffff']
-                    }}
-                    transition={{ 
-                      duration: 2, 
-                      repeat: Infinity, 
-                      delay: index * 0.2 
-                    }}
-                  >
-                    {stat.number}
-                  </motion.div>
+                  <div className="text-2xl md:text-3xl font-bold relative z-10 text-white">
+                    <CountUp target={stat.number} duration={2} />
+                  </div>
                   <motion.div 
                     className="text-sm md:text-base text-blue-100 relative z-10"
                     animate={{ 
@@ -976,43 +1002,21 @@ const LandingPage = () => {
             >
               Call Now: +91 915 987 5674
             </motion.a>
-            <motion.a
-              href="https://wa.me/919159875674"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              WhatsApp Us
-            </motion.a>
+              <motion.a
+                href="https://wa.me/919159875674"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <WhatsAppIcon className="w-5 h-5" color="#ffffff" />
+                WhatsApp Us
+              </motion.a>
           </div>
         </div>
       </section>
 
-      {/* Floating Action Buttons */}
-      <div className="fixed right-6 bottom-6 space-y-4 z-50">
-        <motion.a
-          href="tel:+919159875674"
-          className="w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title="Call Now"
-        >
-          <Phone className="w-6 h-6 text-white" />
-        </motion.a>
-        <motion.a
-          href="https://wa.me/919159875674"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-14 h-14 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title="WhatsApp Us"
-        >
-          <MessageCircle className="w-6 h-6 text-white" />
-        </motion.a>
-      </div>
 
       {/* Live Chat Widget */}
       <AnimatePresence>
@@ -1026,7 +1030,7 @@ const LandingPage = () => {
             <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-2xl flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <MessageCircle className="w-4 h-4" />
+                  <WhatsAppIcon className="w-4 h-4" color="#ffffff" />
                 </div>
                 <div>
                   <div className="font-semibold">Del Square Support</div>

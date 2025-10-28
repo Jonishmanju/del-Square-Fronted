@@ -83,10 +83,10 @@ export default function Header() {
     >
       <div className="px-6">
         {/* Navbar */}
-        <div className="flex justify-between items-center py-4">
+        <div className="flex items-center py-4 relative">
           {/* Logo */}
           <motion.div 
-            className="flex items-center space-x-3 cursor-pointer"
+            className="flex items-center space-x-3 cursor-pointer absolute left-0"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
@@ -119,111 +119,52 @@ export default function Header() {
             </motion.span>
           </motion.div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-1 font-medium text-gray-800">
+          {/* Desktop Menu - Centered */}
+          <div className="hidden md:flex space-x-1 font-medium text-gray-800 mx-auto">
             {menuItems.map((item, index) => (
-              <ScrollReveal 
+              <div
                 key={item.label}
-                delay={index * 0.1}
-                y={-20}
-                rotateY={10}
-                scale={0.9}
                 className="relative"
               >
-                <motion.div
-                  onHoverStart={() => setHoveredItem(item.label)}
-                  onHoverEnd={() => setHoveredItem(null)}
+                <div
+                  onMouseEnter={() => setHoveredItem(item.label)}
+                  onMouseLeave={() => setHoveredItem(null)}
                 >
-                <motion.div
+                <div
                   onClick={() => handleNav(item.path)}
                   className={`relative px-3 py-1.5 cursor-pointer transition-all duration-300 ${
                     location.pathname === item.path
                       ? `text-blue-600 font-semibold`
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
-                  whileHover={{ 
-                    scale: 1.02,
-                    y: -1
-                  }}
-                  whileTap={{ scale: 0.98 }}
                 >
                   <div className="flex items-center gap-1.5">
-                    <motion.div
-                      className="w-3 h-3"
-                      animate={location.pathname === item.path ? {
-                        rotate: [0, 360],
-                        scale: [1, 1.1, 1]
-                      } : {}}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    >
+                    <div className="w-3 h-3">
                       {item.icon}
-                    </motion.div>
+                    </div>
                     <span className="text-sm font-medium">{item.label}</span>
                     
                     {/* Sparkle effect for active item */}
                     {location.pathname === item.path && (
-                      <motion.div
-                        animate={{ 
-                          rotate: 360,
-                          scale: [1, 1.2, 1]
-                        }}
-                        transition={{ 
-                          duration: 2, 
-                          repeat: Infinity,
-                          delay: index * 0.2
-                        }}
-                      >
-                        <Sparkles className="w-2.5 h-2.5 text-yellow-300" />
-                      </motion.div>
+                      <Sparkles className="w-2.5 h-2.5 text-yellow-300" />
                     )}
                   </div>
 
                   {/* Hover Tooltip */}
-                  <AnimatePresence>
-                    {hoveredItem === item.label && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 8, scale: 0.9 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.9 }}
-                        className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap z-50"
-                      >
-                        <div className="flex items-center gap-1">
-                          <Zap className="w-2.5 h-2.5 text-yellow-400" />
-                          {item.description}
-                        </div>
-                        <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-gray-900 rotate-45"></div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                  {hoveredItem === item.label && (
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap z-50">
+                      <div className="flex items-center gap-1">
+                        <Zap className="w-2.5 h-2.5 text-yellow-400" />
+                        {item.description}
+                      </div>
+                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-gray-900 rotate-45"></div>
+                    </div>
+                  )}
 
-                </motion.div>
-              </motion.div>
-            </ScrollReveal>
+                </div>
+              </div>
+            </div>
             ))}
-          </div>
-
-          {/* Desktop Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            <motion.a
-              href="tel:+919159875674"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="text-white px-6 py-2 rounded-lg font-semibold transition"
-              style={{ background: getGradient(theme) }}
-            >
-              CALL NOW
-            </motion.a>
-
-            <motion.a
-              href="https://wa.me/919159875674"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.05 }}
-              className="flex items-center gap-2 bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 shadow-lg"
-            >
-              WhatsApp Us
-            </motion.a>
           </div>
 
           {/* Mobile Toggle */}
@@ -272,16 +213,9 @@ export default function Header() {
                     whileTap={{ scale: 0.99 }}
                   >
                     <div className="flex items-center gap-2">
-                      <motion.div
-                        className="w-3 h-3"
-                        animate={location.pathname === item.path ? {
-                          rotate: [0, 360],
-                          scale: [1, 1.1, 1]
-                        } : {}}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      >
+                      <div className="w-3 h-3">
                         {item.icon}
-                      </motion.div>
+                      </div>
                       <span className="font-medium text-sm">{item.label}</span>
                       
                       {/* Sparkle effect for active item */}
@@ -317,30 +251,6 @@ export default function Header() {
                 ))}
               </div>
 
-              {/* Mobile Buttons */}
-              <div className="flex flex-col gap-3 mt-6">
-                <motion.a
-                  href="tel:+919159875674"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full text-white px-4 py-3 rounded-lg font-semibold shadow-md text-center text-sm"
-                  style={{ background: getGradient(theme) }}
-                >
-                  📞 CALL NOW
-                </motion.a>
-
-                <motion.a
-                  href="https://wa.me/919159875674"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileTap={{ scale: 0.98 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="w-full flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-green-700 shadow-lg text-sm"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp Us
-                </motion.a>
-              </div>
             </motion.div>
           )}
         </AnimatePresence>

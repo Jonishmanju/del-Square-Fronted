@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ThemeContext } from "../../../themes/ThemeProvider";
-import { Building2, Award, Users, CheckCircle, MapPin, Phone, MessageCircle } from "lucide-react";
+import { Building2, Award, Users, CheckCircle, MapPin, Phone } from "lucide-react";
 import ScrollReveal from "../../../components/animations/ScrollReveal";
+import CountUp from "../../../components/animations/CountUp";
+import WhatsAppIcon from "../../../components/icons/WhatsAppIcon";
 
 const AboutUs = () => {
   const theme = useContext(ThemeContext);
@@ -99,12 +101,13 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Our Story Section */}
+      {/* Our Story & Why Choose Section */}
       <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            {/* Our Story */}
             <ScrollReveal y={30} rotateY={15}>
-              <div>
+              <div className="bg-white h-full flex flex-col">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Story</h2>
                 <div className="space-y-4 text-gray-600">
                   <p>
@@ -125,10 +128,11 @@ const AboutUs = () => {
               </div>
             </ScrollReveal>
             
+            {/* Why Choose Del Square */}
             <ScrollReveal delay={0.2} y={30} rotateY={-15}>
-              <div className="bg-gray-50 p-8 rounded-xl">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Why Choose Del Square?</h3>
-                <div className="space-y-4">
+              <div className="bg-gray-50 p-8 rounded-xl h-full flex flex-col">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose Del Square?</h2>
+                <div className="space-y-4 flex-grow">
                   {values.map((value, index) => (
                     <div key={index} className="flex items-start">
                       <CheckCircle className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" />
@@ -167,13 +171,15 @@ const AboutUs = () => {
                   whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
-                  {achievement.icon}
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{achievement.number}</div>
-                <div className="text-lg font-semibold text-gray-700 mb-2">{achievement.label}</div>
-                <div className="text-sm text-gray-600">{achievement.description}</div>
-              </motion.div>
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600">
+                    {achievement.icon}
+                  </div>
+                  <div className="text-3xl font-bold text-gray-900 mb-2">
+                    <CountUp target={achievement.number} duration={3} />
+                  </div>
+                  <div className="text-lg font-semibold text-gray-700 mb-2">{achievement.label}</div>
+                  <div className="text-sm text-gray-600">{achievement.description}</div>
+                </motion.div>
               </ScrollReveal>
             ))}
           </div>
@@ -244,7 +250,7 @@ const AboutUs = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <MessageCircle className="w-5 h-5" />
+              <WhatsAppIcon className="w-5 h-5" color="#ffffff" />
               WhatsApp Us
             </motion.a>
           </div>
