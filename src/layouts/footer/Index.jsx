@@ -156,16 +156,13 @@ export default function Footer() {
         </div>
 
         {/* CTA Banner */}
-        <div className="mt-12 bg-gradient-to-br from-blue-600 to-blue-800 text-white py-6 px-6 rounded-2xl flex flex-col md:flex-row items-center justify-between">
-          <h3 className="text-lg md:text-xl font-semibold text-center md:text-left">
+        <div className="mt-12 bg-gradient-to-br from-blue-600 to-blue-800 text-white py-6 px-6 rounded-2xl text-center">
+          <h3 className="text-lg md:text-xl font-semibold">
             Ready to Start Your Project?
           </h3>
-          <a
-            href="tel:+919159875674"
-            className="mt-4 md:mt-0 bg-white text-blue-700 px-5 py-2 rounded-lg font-semibold hover:bg-gray-100 transition"
-          >
-            Call Us Now
-          </a>
+          <p className="text-blue-100 mt-2">
+            Contact us for professional structural engineering services
+          </p>
         </div>
 
         {/* Bottom Section */}

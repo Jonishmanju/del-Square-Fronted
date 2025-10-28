@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import LottieLoader from "../LottieLoader";
 import logoImage from "../../assets/images/del-square-logo.svg";
 
 /**
@@ -18,7 +17,7 @@ export default function PageTransition({ children }) {
 
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000); // 2 seconds for animation
+    }, 400); // Very quick logo transition
 
     return () => clearTimeout(timer);
   }, [location.pathname]);
@@ -33,29 +32,36 @@ export default function PageTransition({ children }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-gradient-to-br from-blue-950 via-blue-900 to-blue-950 flex items-center justify-center z-[9999]"
-            style={{ perspective: '1000px' }}
+            className="fixed inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex items-center justify-center z-[9999]"
           >
-            {/* Slide Down Del Square Logo */}
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-30">
+              <div className="w-full h-full bg-gradient-to-br from-white/5 to-transparent"></div>
+            </div>
+            
+            {/* Del Square Logo */}
             <motion.div
               className="relative z-10 text-center"
-              initial={{ y: -200, opacity: 0, scale: 0.5 }}
+              initial={{ scale: 0.5, opacity: 0, rotateY: -180 }}
               animate={{ 
-                y: [0, 10, 0],
-                opacity: 1,
-                scale: 1
+                scale: 1, 
+                opacity: 1, 
+                rotateY: 0,
+                y: [0, -10, 0]
               }}
-              exit={{ y: -200, opacity: 0 }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              exit={{ scale: 0.5, opacity: 0, rotateY: 180 }}
+              transition={{ 
+                duration: 0.6,
+                y: { duration: 2, repeat: Infinity, ease: "easeInOut" }
+              }}
             >
               {/* Logo Image */}
               <motion.img
                 src={logoImage}
-                alt="Del Square Loading..."
-                className="h-40 w-40 mx-auto drop-shadow-2xl"
-                style={{ filter: 'drop-shadow(0 25px 50px rgba(255, 255, 255, 0.3))' }}
+                alt="Del Square"
+                className="w-24 h-24 mx-auto mb-4 drop-shadow-2xl"
                 animate={{
-                  y: [0, -20, 0]
+                  scale: [1, 1.1, 1]
                 }}
                 transition={{
                   duration: 1.5,
@@ -64,44 +70,44 @@ export default function PageTransition({ children }) {
                 }}
               />
               
-              {/* Text with slide */}
-              <motion.p
-                className="text-white text-3xl font-bold tracking-wide mt-6"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ 
-                  opacity: 1,
-                  y: [0, -5, 0]
+              {/* Company Name */}
+              <motion.h2
+                className="text-2xl font-bold text-white"
+                animate={{
+                  opacity: [0.7, 1, 0.7]
                 }}
                 transition={{
-                  opacity: { duration: 0.5, delay: 0.3 },
-                  y: { duration: 1.2, repeat: Infinity, ease: "easeInOut", delay: 0.5 }
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
                 }}
               >
                 DEL SQUARE
-              </motion.p>
+              </motion.h2>
             </motion.div>
 
-            {/* Loading Text */}
+            {/* Loading Dots */}
             <motion.div
-              className="absolute bottom-20 left-1/2 transform -translate-x-1/2"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ delay: 0.5 }}
+              className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
             >
-              <motion.p
-                className="text-white/80 font-medium tracking-wide text-lg"
-                animate={{
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                LOADING...
-              </motion.p>
+              {[0, 1, 2].map((index) => (
+                <motion.div
+                  key={index}
+                  className="w-3 h-3 bg-white rounded-full"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.5, 1, 0.5]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: index * 0.2
+                  }}
+                />
+              ))}
             </motion.div>
           </motion.div>
         )}

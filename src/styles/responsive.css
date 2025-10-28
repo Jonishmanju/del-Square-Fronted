@@ -1,0 +1,144 @@
+/* Mobile-First Responsive Utilities */
+
+/* Container Utilities */
+.container-responsive {
+  @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+  max-width: 1280px;
+}
+
+.container-tight {
+  @apply w-full mx-auto px-4 sm:px-6 md:px-8;
+  max-width: 1024px;
+}
+
+/* Typography Responsive Classes */
+.heading-responsive {
+  @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold;
+}
+
+.subheading-responsive {
+  @apply text-xl sm:text-2xl md:text-3xl font-semibold;
+}
+
+.body-responsive {
+  @apply text-base sm:text-lg md:text-xl;
+}
+
+.caption-responsive {
+  @apply text-sm sm:text-base;
+}
+
+/* Spacing Utilities */
+.section-padding {
+  @apply py-12 sm:py-16 md:py-20 lg:py-24;
+}
+
+.section-margin {
+  @apply mb-8 sm:mb-12 md:mb-16;
+}
+
+/* Button Responsive Classes */
+.btn-responsive {
+  @apply px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg;
+}
+
+.btn-full-mobile {
+  @apply w-full sm:w-auto;
+}
+
+/* Grid Responsive Classes */
+.grid-responsive-2 {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8;
+}
+
+.grid-responsive-3 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8;
+}
+
+.grid-responsive-4 {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6;
+}
+
+/* Card Responsive Classes */
+.card-responsive {
+  @apply p-4 sm:p-6 md:p-8 rounded-lg sm:rounded-xl;
+}
+
+/* Hide/Show on Different Screens */
+.mobile-only {
+  @apply block sm:hidden;
+}
+
+.tablet-up {
+  @apply hidden sm:block;
+}
+
+.desktop-only {
+  @apply hidden lg:block;
+}
+
+/* Mobile Navigation */
+.mobile-nav {
+  @apply fixed inset-0 bg-white z-50 p-4 sm:p-6;
+}
+
+/* Responsive Images */
+.img-responsive {
+  @apply w-full h-auto object-cover;
+}
+
+/* Touch-friendly Interactive Elements */
+.touch-target {
+  @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+}
+
+/* Mobile-optimized animations */
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Mobile viewport fixes */
+.mobile-viewport {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+/* Safe area padding for mobile devices */
+.safe-area-padding {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Responsive text sizing */
+.text-responsive-xs {
+  @apply text-xs sm:text-sm;
+}
+
+.text-responsive-sm {
+  @apply text-sm sm:text-base;
+}
+
+.text-responsive-base {
+  @apply text-base sm:text-lg;
+}
+
+.text-responsive-lg {
+  @apply text-lg sm:text-xl md:text-2xl;
+}
+
+.text-responsive-xl {
+  @apply text-xl sm:text-2xl md:text-3xl;
+}
+
+.text-responsive-2xl {
+  @apply text-2xl sm:text-3xl md:text-4xl;
+}
+
+.text-responsive-3xl {
+  @apply text-3xl sm:text-4xl md:text-5xl;
+}

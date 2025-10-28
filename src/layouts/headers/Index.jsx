@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useInView } from "fra
 import { useNavigate, useLocation } from "react-router-dom";
 import { ThemeContext } from "../../themes/ThemeProvider";
 import { getGradient } from "../../themes/theme";
-import { Building2, Home, Users, Briefcase, FolderOpen, Phone, MessageCircle, Sparkles, Zap } from "lucide-react";
+import { Building2, Home, Users, Briefcase, FolderOpen, Phone, Zap } from "lucide-react";
 import logoImage from "../../assets/images/del-square-logo.svg";
 import ScrollReveal from "../../components/animations/ScrollReveal";
 
@@ -37,35 +37,35 @@ export default function Header() {
       path: "/", 
       icon: <Home className="w-4 h-4" />,
       color: "from-blue-500 to-blue-600",
-      description: "Welcome to Del Square"
+      description: "Home - Del Square Structural Engineering"
     },
     { 
       label: "ABOUT", 
       path: "/about", 
       icon: <Users className="w-4 h-4" />,
       color: "from-green-500 to-green-600",
-      description: "Our Story & Team"
+      description: "About Us - Learn Our Story & Meet Our Team"
     },
     { 
       label: "SERVICES", 
       path: "/services", 
       icon: <Briefcase className="w-4 h-4" />,
       color: "from-purple-500 to-purple-600",
-      description: "Engineering Solutions"
+      description: "Services - Professional Engineering Solutions"
     },
     { 
       label: "PROJECTS", 
       path: "/projects", 
       icon: <FolderOpen className="w-4 h-4" />,
       color: "from-orange-500 to-orange-600",
-      description: "Our Portfolio"
+      description: "Projects - View Our Completed Portfolio"
     },
     { 
       label: "CONTACT", 
       path: "/contact", 
       icon: <Phone className="w-4 h-4" />,
       color: "from-red-500 to-red-600",
-      description: "Get In Touch"
+      description: "Contact Us - Get In Touch With Our Team"
     },
   ];
 
@@ -81,56 +81,44 @@ export default function Header() {
         backgroundColor: `rgba(255, 255, 255, ${headerOpacity})`
       }}
     >
-      <div className="px-6">
+      <div className="px-4 sm:px-6">
         {/* Navbar */}
-        <div className="flex items-center py-4 relative">
+        <div className="flex justify-between items-center py-3 sm:py-4">
           {/* Logo */}
           <motion.div 
-            className="flex items-center space-x-3 cursor-pointer absolute left-0"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => handleNav("/")}
           >
-            <motion.img 
+            <img 
               src={logoImage}
               alt="Del Square Logo"
-              className="w-16 h-16"
-              animate={{ 
-                boxShadow: [
-                  '0 4px 15px rgba(59, 130, 246, 0.3)',
-                  '0 8px 25px rgba(59, 130, 246, 0.5)',
-                  '0 4px 15px rgba(59, 130, 246, 0.3)'
-                ]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16"
             />
-            <motion.span
-              className="font-bold text-xl hidden md:block"
+            <span
+              className="font-bold text-lg sm:text-xl hidden sm:block"
               style={{ color: theme.primary }}
-              animate={{
-                textShadow: [
-                  '0 0 0px rgba(59, 130, 246, 0)',
-                  '0 0 10px rgba(59, 130, 246, 0.3)',
-                  '0 0 0px rgba(59, 130, 246, 0)'
-                ]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
             >
               DEL SQUARE
-            </motion.span>
+            </span>
           </motion.div>
 
           {/* Desktop Menu - Centered */}
-          <div className="hidden md:flex space-x-1 font-medium text-gray-800 mx-auto">
+          <div className="hidden md:flex justify-center flex-1">
+            <div className="flex space-x-1 font-medium text-gray-800">
             {menuItems.map((item, index) => (
-              <div
+              <ScrollReveal 
                 key={item.label}
+                delay={index * 0.1}
+                y={-20}
+                rotateY={10}
+                scale={0.9}
                 className="relative"
               >
-                <div
-                  onMouseEnter={() => setHoveredItem(item.label)}
-                  onMouseLeave={() => setHoveredItem(null)}
+                <motion.div
+                  onHoverStart={() => setHoveredItem(item.label)}
+                  onHoverEnd={() => setHoveredItem(null)}
                 >
-                <div
+                <motion.div
                   onClick={() => handleNav(item.path)}
                   className={`relative px-3 py-1.5 cursor-pointer transition-all duration-300 ${
                     location.pathname === item.path
@@ -138,34 +126,58 @@ export default function Header() {
                       : 'text-gray-600 hover:text-gray-900'
                   }`}
                 >
-                  <div className="flex items-center gap-1.5">
-                    <div className="w-3 h-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 flex items-center justify-center">
                       {item.icon}
                     </div>
                     <span className="text-sm font-medium">{item.label}</span>
-                    
-                    {/* Sparkle effect for active item */}
-                    {location.pathname === item.path && (
-                      <Sparkles className="w-2.5 h-2.5 text-yellow-300" />
-                    )}
                   </div>
 
-                  {/* Hover Tooltip */}
-                  {hoveredItem === item.label && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-gray-900 text-white px-2 py-1 rounded text-xs whitespace-nowrap z-50">
-                      <div className="flex items-center gap-1">
-                        <Zap className="w-2.5 h-2.5 text-yellow-400" />
-                        {item.description}
-                      </div>
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-gray-900 rotate-45"></div>
-                    </div>
-                  )}
+                  {/* Hover Tooltip - For all navigation icons */}
+                  <AnimatePresence>
+                    {hoveredItem === item.label && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.9 }}
+                        transition={{ 
+                          duration: 0.2
+                        }}
+                        className="absolute top-full mt-2 bg-gray-900 text-white px-3 py-2 rounded-lg text-xs whitespace-nowrap z-50 shadow-lg"
+                        style={{ 
+                          left: '1rem', // Position at icon center
+                          transform: 'translateX(-50%)'
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-3 h-3 text-yellow-400" />
+                          <span className="font-medium">{item.description}</span>
+                        </div>
+                        {/* Arrow pointing up */}
+                        <div 
+                          className="absolute -top-1 bg-gray-900 rotate-45"
+                          style={{
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '6px',
+                            height: '6px'
+                          }}
+                        ></div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
 
-                </div>
-              </div>
-            </div>
+                </motion.div>
+              </motion.div>
+            </ScrollReveal>
             ))}
+            </div>
           </div>
+
+          {/* Spacer for balance */}
+          <div className="hidden md:block w-32"></div>
+
+
 
           {/* Mobile Toggle */}
           <button
@@ -185,7 +197,7 @@ export default function Header() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "100%" }}
               transition={{ duration: 0.3 }}
-              className="fixed top-0 right-0 w-full sm:w-3/4 h-full bg-white shadow-2xl p-6 space-y-6 z-50 md:hidden overflow-y-auto"
+              className="fixed top-0 right-0 w-full sm:w-80 md:w-96 h-full bg-white shadow-2xl p-4 sm:p-6 space-y-4 sm:space-y-6 z-50 md:hidden overflow-y-auto"
             >
               {/* Close Button */}
               <button
@@ -209,31 +221,12 @@ export default function Header() {
                         : 'text-gray-600 hover:text-gray-900'
                     }`}
                     onClick={() => handleNav(item.path)}
-                    whileHover={{ scale: 1.01, x: 5 }}
-                    whileTap={{ scale: 0.99 }}
                   >
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-4 h-4 flex items-center justify-center">
                         {item.icon}
                       </div>
                       <span className="font-medium text-sm">{item.label}</span>
-                      
-                      {/* Sparkle effect for active item */}
-                      {location.pathname === item.path && (
-                        <motion.div
-                          animate={{ 
-                            rotate: 360,
-                            scale: [1, 1.2, 1]
-                          }}
-                          transition={{ 
-                            duration: 2, 
-                            repeat: Infinity,
-                            delay: index * 0.2
-                          }}
-                        >
-                          <Sparkles className="w-2.5 h-2.5 text-yellow-300" />
-                        </motion.div>
-                      )}
                     </div>
                     
                     {/* Description for mobile */}
@@ -250,6 +243,7 @@ export default function Header() {
                   </motion.div>
                 ))}
               </div>
+
 
             </motion.div>
           )}

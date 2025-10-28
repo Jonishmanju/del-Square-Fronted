@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "deploy": "node deploy.js",
     "upload": "vite build && copyfiles -u 1 dist/**/* ../z2i_backend-server/dist"
   },
   "dependencies": {
